@@ -26,8 +26,7 @@ public class CoursesListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("ipAddress", req.getRemoteAddr());
-        context.setVariable("clientAgent", req.getHeader("User-Agent"));
+
         context.setVariable("courses", this.courseService.listAll());
         this.springTemplateEngine.process("listCourses.html",context,resp.getWriter());
 
@@ -35,7 +34,9 @@ public class CoursesListServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/AddStudent");
+        String courseChosen = req.getParameter("course");
+        req.getSession().setAttribute("courseChosen", courseChosen);
+        resp.sendRedirect("/addStudent");
     }
 }
 
