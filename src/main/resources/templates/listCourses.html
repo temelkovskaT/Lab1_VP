@@ -1,0 +1,42 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Welcome and Choose a Course</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Courses List</h1>
+    <ul>
+        <li th:each="course : ${courses}" >
+            <th:block th:text="${course.getName()}"></th:block>
+            <br/>
+            <th:block th:text="${course.getDescription()}"></th:block>
+
+        </li>
+    </ul>
+</header>
+<main>
+    <h2>Choose course:</h2>
+
+    <div th:each="course : ${courses}">
+        <input type="radio" th:name= "${course.getCourseId()}" value="1">
+        <th:block th:text="${course.getName()}"></th:block><br/>
+    </div>
+
+
+    <input type="radio" th:name="${courses.get(1).getCourseId()}" value="2"> <th:block th:text="${courses.get(1).getName()}"></th:block><br/>
+    <input type="radio" th:name= "${courses.get(2).getCourseId()}" value="3"> <th:block th:text="${courses.get(2).getName()}"></th:block><br/>
+    <input type="radio" th:name= "${courses.get(3).getCourseId()}" value="4"> <th:block th:text="${courses.get(3).getName()}"></th:block><br/>
+    <input type="radio" th:name= "${courses.get(4).getCourseId()}" value="5"> <th:block th:text="${courses.get(4).getName()}"></th:block><br/>
+
+    <br/>
+    <a href="/АddStudent">Submit</a>
+</main>
+</body>
+</html>
