@@ -32,21 +32,17 @@
 </header>
 <section>
     <h2>Select the student to enroll:</h2>
-<!--    <form th:method="POST" th:action="@{/addStudent}">-->
-<!--        <input type="submit" th:value="Create New Student"/>-->
+    <form th:method="POST" th:action="@{/addStudent}">
 
-<!--    </form>-->
-    <form th:method="POST" th:action="@{/StudentEnrollmentSummary}">
+            <div th:each="student : ${students}" >
+                <input type="radio" name="student" th:value="${student.getUsername()}">
+                <th:block th:text="${student.getName()}"></th:block>
+                <th:block th:text="${student.getSurname()}"></th:block>
+                <br/>
+            </div>
 
-         <br/> <br/>
+        <a href='/createStudent' type='button'>Create New Student</a> <br/> <br/>
 
-        <div th:each="student : ${students}">
-            <input type="radio" name="size" th:value="${student.getUsername()}">
-            <th:block th:text="${student.getName()}"></th:block>
-            <th:block th:text="${student.getSurname()}"></th:block>
-            <br/>
-        </div>
-<!--        <input  th:value="Create New Student" type='submit'/><br/> <br/>-->
 
         <input type="submit" th:value="Submit"/>
     </form>
@@ -60,7 +56,9 @@
         </tr>
         <tr>
             <td><b>Course Id</b></td>
-            <td>2</td>
+            <td>
+                <th:block th:text="${session.courseChosen}"></th:block>
+            </td>
         </tr>
     </table>
 </aside>

@@ -35,6 +35,7 @@ public class CoursesListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String courseChosen = req.getParameter("course");
+
         req.getSession().setAttribute("courseChosen", courseChosen);
         resp.sendRedirect("/addStudent");
     }

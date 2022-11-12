@@ -15,15 +15,15 @@ public class StudentRepository {
 
     @PostConstruct
     public void init(){
-        students.add(new Student("000001","xxxxx1",
+        students.add(new Student("petre.petre","xxxxx1",
                 "Petre","Petrovski"));
-        students.add(new Student("000002","xxxxx2",
+        students.add(new Student("marija.m","xxxxx2",
                 "Marija","Nikolovska"));
-        students.add(new Student("000003","xxxxx3",
+        students.add(new Student("stojan.s","xxxxx3",
                 "Stojan","Stojanovski"));
-        students.add(new Student("000004","xxxxx4",
+        students.add(new Student("riste.r","xxxxx4",
                 "Riste","Ristevski"));
-        students.add(new Student("000005","xxxxx5",
+        students.add(new Student("tea.t","xxxxx5",
                 "Teodora","Temelkovska"));
 
 
@@ -34,9 +34,9 @@ public class StudentRepository {
     }
 
     public List<Student> findAllByNameOrSurname(String text){
-        return students.stream().filter(s-> s.getName().contains(text)
+        return students.stream().filter(s-> s.getUsername().contains(text)
                 || s.getSurname().contains(text)
-                || s.getUsername().contains(text)
+                || s.getName().contains(text)
         ).collect(Collectors.toList());
     }
 }

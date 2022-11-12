@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>WP lab - Students in Course</title>
+
+</head>
+<body>
+<header>
+    <h1>Students in Course </h1>
+</header>
+<section>
+    <div>
+        <th:block th:text="${session.courseChosen}"></th:block>
+    </div>
+    <ul>
+        <li th:each="student : ${courseStudents}">
+            <th:block th:text="${student.getName()}"></th:block>
+            <th:block th:text="${student.getSurname()}"></th:block>
+            <th:block th:text="${student.getUsername()}"></th:block>
+        </li>
+<!--        Treba da izvlechesh studenti od -->
+<!--        <li>Петар Петров (petar.petrov)</li>-->
+    </ul>
+    <a href="/listCourses">Back</a>
+</section>
+
+</body>
+</html>

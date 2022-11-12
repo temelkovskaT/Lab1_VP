@@ -3,6 +3,7 @@ package mk.ukim.finki.wp.lab.web;
 
 import mk.ukim.finki.wp.lab.model.Course;
 import mk.ukim.finki.wp.lab.repository.StudentRepository;
+import mk.ukim.finki.wp.lab.service.CourseService;
 import mk.ukim.finki.wp.lab.service.StudentService;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -17,10 +18,12 @@ import java.io.IOException;
 @WebServlet(name="list-student-servlet", urlPatterns = "/addStudent")
 public class ListStudentServlet extends HttpServlet {
     private final StudentService studentService;
+    private final CourseService courseService;
     private final SpringTemplateEngine springTemplateEngine;
 
-    public ListStudentServlet(StudentService studentService, SpringTemplateEngine springTemplateEngine) {
+    public ListStudentServlet(StudentService studentService, CourseService courseService, SpringTemplateEngine springTemplateEngine) {
         this.studentService = studentService;
+        this.courseService = courseService;
         this.springTemplateEngine = springTemplateEngine;
     }
 
@@ -35,7 +38,12 @@ public class ListStudentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       // resp.sendRedirect("/createStudent");
+       String studentChosen = req.getParameter("student");
+       req.getSession().setAttribute("studentChosen", studentChosen);
+       Long courseId = Long.parseLong(req.getSession().getAttribute("courseChosen").toString());
+
+       courseService.addStudentInCourse(studentChosen, courseId);
+       resp.sendRedirect("/StudentEnrollmentSummary");
 
     }
 }
