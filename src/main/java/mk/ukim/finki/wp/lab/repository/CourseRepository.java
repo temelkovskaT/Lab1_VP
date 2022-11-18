@@ -3,6 +3,7 @@ package mk.ukim.finki.wp.lab.repository;
 
 import mk.ukim.finki.wp.lab.model.Course;
 import mk.ukim.finki.wp.lab.model.Student;
+import mk.ukim.finki.wp.lab.model.Teacher;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +15,7 @@ public class CourseRepository {
 
     private static List<Course> courses = new ArrayList<>();
     private StudentRepository studentRepository;
+    private TeacherRepository teacherRepository;
 
 
     private List<Student> studentsVP = new ArrayList<>();
@@ -49,11 +51,11 @@ public class CourseRepository {
         }
 
 
-        courses.add(new Course(1L, "Веб програмирање", "neshto1" ,studentsVP));
-        courses.add(new Course(2L, "Бази на податоци", "neshto2",studentsBP));
-        courses.add(new Course(3L, "Вовед во науката за податоци", "neshto3",studentsVNP));
-        courses.add(new Course(4L, "Визуелизација", "neshto4",studentsV));
-        courses.add(new Course(5L, "Компјутерска Етика", "neshto5",studentsKE));
+        courses.add(new Course(1L, "Веб програмирање", "neshto1" ,studentsVP,teacherRepository.findAll().get(0)));
+        courses.add(new Course(2L, "Бази на податоци", "neshto2",studentsBP,teacherRepository.findAll().get(1)));
+        courses.add(new Course(3L, "Вовед во науката за податоци", "neshto3",studentsVNP, teacherRepository.findAll().get(2)));
+        courses.add(new Course(4L, "Визуелизација", "neshto4",studentsV, teacherRepository.findAll().get(3)));
+        courses.add(new Course(5L, "Компјутерска Етика", "neshto5",studentsKE, teacherRepository.findAll().get(4)));
     }
 
     public List<Course> findAllCourses(){

@@ -23,8 +23,8 @@ public class CourseFilter implements Filter {
 
         String path = request.getServletPath();
         Long courseId = (Long)request.getSession().getAttribute("courseChosen");
-        if(courseId==null && !path.equals("/listCourses")){
-            response.sendRedirect("/listCourses");
+        if(courseId==null && !path.equals("/courses")){
+            response.sendRedirect("/courses");
         }else{
             filterChain.doFilter(servletRequest,servletResponse);
         }
